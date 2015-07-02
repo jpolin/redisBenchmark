@@ -15,7 +15,8 @@ void run_test(map<int, double> &results, function<void(const string& msg)> publi
 
 	/******** Test Parameters **********/
 	const int niters = 1000; // Per msg size
-	vector<int> payload_size = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024}; // bytes
+	//vector<int> payload_size = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024}; // bytes
+	vector<int> payload_size = {64}; // Pretty good middleground
 	/***********************************/
 
 	for (vector<int>::iterator it = payload_size.begin(); it != payload_size.end(); ++it) {
@@ -50,7 +51,13 @@ void log_test(map<int, double> &results, string test_name){
 	ofstream ofs(test_name, ofstream::out);
 	for(auto it : results) {
 		ofs << it.first << ", "<< it.second << endl;
+		// Print to console as well
+		if (true) {
+			cout << test_name << ": " << it.first << " bytes, " << it.second << " secs, "
+				 << it.second<< " milliseconds per message \n";
+		}
 	}
+
 	ofs.close();
 }
 

@@ -4,7 +4,10 @@ project(rosTest)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  std_msgs
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -63,7 +66,7 @@ find_package(catkin REQUIRED)
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   std_msgs
 # )
 
 ###################################
@@ -78,7 +81,7 @@ find_package(catkin REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES rosTest
-#  CATKIN_DEPENDS other_catkin_pkg
+#  CATKIN_DEPENDS roscpp std_msgs
 #  DEPENDS system_lib
 )
 
@@ -89,6 +92,9 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a cpp library
 # add_library(rosTest
@@ -154,3 +160,14 @@ catkin_package(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+## Set the compilation flags
+SET(CMAKE_CXX_FLAGS "-Wall -std=c++11 -g")
+
+SET(BASE_DIR /home/jpolin/git/redisBenchmark)
+
+include_directories(include ${catkin_INCLUDE_DIRS} ${BASE_DIR}/test_functions)
+
+add_executable(rosTest src/rosPubSub.cpp ${BASE_DIR}/test_functions/test_functions.cpp)
+target_link_libraries(rosTest ${catkin_LIBRARIES})
+#add_dependencies(rosTest beginner_tutorials_generate_messages_cpp)

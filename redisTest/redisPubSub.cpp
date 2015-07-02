@@ -39,6 +39,7 @@ int main(int argc, char* argv[]) {
 	string topic = "Test Topic";
 
 	// TODO: Try using nowait
+	rdx_pub.noWait(true);
 
 	// Subscriber just triggers conditional variable
 	rdx_sub.subscribe(topic, [&](const string& topic, const string& msg) {
