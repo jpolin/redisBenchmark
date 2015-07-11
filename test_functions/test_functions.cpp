@@ -14,9 +14,9 @@ void run_test(map<int, double> &results, function<void(const string& msg)> publi
 				mutex &m, bool &msg_rec, condition_variable &cv) {
 
 	/******** Test Parameters **********/
-	const int niters = 1000; // Per msg size
+	const int niters = 10000; // Per msg size
 	//vector<int> payload_size = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024}; // bytes
-	vector<int> payload_size = {64}; // Pretty good middleground
+	vector<int> payload_size = {600}; // Pretty good middleground
 	/***********************************/
 
 	for (vector<int>::iterator it = payload_size.begin(); it != payload_size.end(); ++it) {
@@ -54,7 +54,7 @@ void log_test(map<int, double> &results, string test_name){
 		// Print to console as well
 		if (true) {
 			cout << test_name << ": " << it.first << " bytes, " << it.second << " secs, "
-				 << it.second<< " milliseconds per message \n";
+				 << it.second / 10.0 << " milliseconds per message \n";
 		}
 	}
 

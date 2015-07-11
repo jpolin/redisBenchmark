@@ -60,7 +60,7 @@ int main(int argc, char** argv){
 
 	/******** Test Parameters **********/
 		const int niters = 1000; // Per msg size
-		vector<int> payload_size = {64}; // bytes
+		vector<int> payload_size = {600}; // bytes
 		/***********************************/
 
 		for (vector<int>::iterator it = payload_size.begin(); it != payload_size.end(); ++it) {
